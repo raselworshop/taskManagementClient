@@ -29,21 +29,32 @@ const TaskForm = () => {
   const initialValues = {
     title: "",
     description: "",
-    category: "",
+    category: "To-Do",
     timestamp: new Date(),
   };
 
-  const handleSubmit = (values, { resetForm, setSubmitting }) => {
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     console.log("Task Submitted:", values);
     console.log("Task Submitted user:", user);
-    if (user) {
-      try {
-      } catch (error) {}
+    if (!user || !user?.token) {
+      console.error("User isn't Authenticated")
+      setSubmitting(false)
+      return
     }
-    setTimeout(() => {
-      resetForm();
+    try {
+        // const token = localStorage.getItem(user.token)
+        // console.log("From local storage", token)
+        const taskData = {...values, userId: user?.uid}
+        const {data} = await axiosPublic.post('/tasks', taskData, {
+            headers: {Authorization:`Bearer ${user?.token}`}
+        })
+        console.log("data post", data)
+        resetForm()
+    } catch (error) {
+        console.error("Error submitting task:", error.response?.data || error.message);
+    } finally {
       setSubmitting(false);
-    }, 500); // Simulate async submission
+    }
   };
 
   return (
@@ -53,7 +64,7 @@ const TaskForm = () => {
       onSubmit={handleSubmit}
     >
       {({ setFieldValue, values, isSubmitting }) => (
-        <Form className="max-w-4xl max-h-[480px] overflow-auto mx-auto p-4 bg-base-100 rounded-xl shadow-lg space-y-2">
+        <Form className="max-w-4xl max-h-[480px] overflow-auto mx-auto p-4 bg-base-100 rounded-xl shadow-lg">
           <h2 className="text-3xl font-bold text-center text-base-content">
             Add New Task
           </h2>

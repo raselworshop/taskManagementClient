@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -51,6 +52,7 @@ const AuthProvider = ({ children }) => {
             try {
                 const {data} = await axiosPublic.post('/login',{ idToken: currentUser.accessToken, role:"user"})
                 console.log("Login successful", data);
+                console.log("Login successful token", {token: data?.token});
 
                 localStorage.setItem("user", JSON.stringify({...currentUser, token: data?.token}));
 
@@ -62,7 +64,9 @@ const AuthProvider = ({ children }) => {
         login()
       } else {
         // do something
-        localStorage.removeItem({...currentUser, token: data.token}) 
+        localStorage.removeItem("user") 
+        setUser(null)
+        toast.error("Sign out")
         setLoading(false)
     }
     });
@@ -70,7 +74,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubcribe();
     };
-  }, [auth, axiosPublic]);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,
