@@ -5,6 +5,7 @@ import SignUp from "../pages/AuthRelated/SignUp";
 import Signin from "../pages/AuthRelated/Signin";
 import Dashboard from "../layouts/Dashboard";
 import TaskForm from "../pages/DashboardLayout/DBELEMENT/TaskForm/TaskForm";
+import TaskList from "../pages/DashboardLayout/DBELEMENT/TaskList/TaskList";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: "taskaddform",
                 element:<TaskForm/>
+            },
+            {
+                path: 'tasklist',
+                element: <TaskList/>
             }
         ]
     },

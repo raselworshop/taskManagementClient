@@ -46,7 +46,7 @@ const TaskForm = () => {
         // console.log("From local storage", token)
         const taskData = {...values, userId: user?.uid}
         const {data} = await axiosPublic.post('/tasks', taskData, {
-            headers: {Authorization:`Bearer ${user?.token}`}
+            headers: {Authorization:`Bearer ${user?.token || user?.accessToken}`}
         })
         console.log("data post", data)
         resetForm()
@@ -123,8 +123,8 @@ const TaskForm = () => {
             >
               <option value="">Select a category</option>
               <option value="To-Do">To-Do</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Done">Done</option>
+              {/* <option value="In Progress">In Progress</option>
+              <option value="Done">Done</option> */}
             </Field>
             <ErrorMessage
               name="category"

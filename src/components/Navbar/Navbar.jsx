@@ -18,7 +18,7 @@ const Navbar = () => {
         </li>
       </>
     );
-  
+
 //   const links = (
 //     <div role="tablist" className="tabs tabs-lifted">
 //       <NavLink

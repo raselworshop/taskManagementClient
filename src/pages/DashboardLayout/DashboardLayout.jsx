@@ -36,9 +36,9 @@ export default function DashboardLayout() {
           <a href="#" className="block py-2 px-4 rounded hover:bg-gray-200">
             Users
           </a>
-          <a href="#" className="block py-2 px-4 rounded hover:bg-gray-200">
-            My Projects
-          </a>
+          <Link to={'/dashboard/tasklist'} className="block py-2 px-4 rounded hover:bg-gray-200">
+            Task List
+          </Link>
           <Link
             to={"/dashboard/taskaddform"}
             className="block py-2 px-4 rounded hover:bg-gray-200"
