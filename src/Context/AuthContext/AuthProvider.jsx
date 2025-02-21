@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -54,7 +55,7 @@ const AuthProvider = ({ children }) => {
           .then((res) => {
             // console.log("Login successful", res); //this and down log nothing show why
             if (res.data.token) {
-              toast.success('Login successful')
+              // toast.success('Login successful')
               localStorage.setItem(
                 "user",
                 JSON.stringify({ token: res.data?.token })
@@ -77,6 +78,9 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("user");
 
         toast.error("Sign out");
+        if(!currentUser){
+          return <Navigate to={'/joinus'} />
+        }
         setLoading(false);
       }
     });

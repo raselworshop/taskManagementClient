@@ -8,15 +8,15 @@ export default function DashboardLayout() {
   console.log(location);
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex md:h-[calc(100vh - 80px)] bg-gray-100">
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 w-64 bg-white shadow-md transition-transform duration-300 md:relative md:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed inset-y-0 overflow-auto left-0 w-64 bg-white min-h-full shadow-md transition-transform duration-300 md:relative md:translate-x-0 ${
+          sidebarOpen ? "translate-x-0 z-40" : "-translate-x-full"
         }`}
       >
         <div className="p-4 flex justify-between items-center md:hidden">
-          <span className="text-xl font-bold">BVITE</span>
+          <span className="text-xl font-bold">Task Management</span>
           <FaTimes
             className="cursor-pointer text-xl"
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -49,7 +49,7 @@ export default function DashboardLayout() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top Navigation */}
         <div className="bg-white shadow p-4 flex justify-between items-center">
           <button className="md:hidden" onClick={() => setSidebarOpen(true)}>
@@ -61,13 +61,13 @@ export default function DashboardLayout() {
             className="border px-4 py-2 w-full max-w-md rounded"
           />
           {/* Breadcrumb */}
-          <div className="px-6 py-2 bg-gray-200 hidden md:block">
+          <div className="px-6 py-2 bg-gray-200 hidden md:block max-w-xs">
             <span className="text-gray-600">{location.pathname}</span>
           </div>
         </div>
 
         {/* Main Page Content */}
-        <div className="m-6">
+        <div className="m-6 flex-1 overflow-auto">
           <Outlet />
         </div>
       </div>

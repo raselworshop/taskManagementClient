@@ -24,6 +24,10 @@ const TaskList = () => {
         },
         { "To-Do": [], "In Progress": [], "Done": [] }
       );
+      // Sort each category by order
+      Object.keys(grouped).forEach((cat) => {
+        grouped[cat].sort((a, b) => a.order - b.order);
+      });
       setTasks(grouped);
     } catch (error) {
       console.error("Fetch tasks failed:", error.response?.data || error.message);
@@ -59,25 +63,37 @@ const TaskList = () => {
       1
     );
 
+    const updatedDestTasks = [...destTasks];
     if (activeCategory === overCategory) {
       const overIndex = destTasks.findIndex((t) => t._id === overId);
-      destTasks.splice(overIndex, 0, movedTask);
-      setTasks((prev) => ({ ...prev, [activeCategory]: destTasks }));
+      updatedDestTasks.splice(overIndex, 0, movedTask);
     } else {
       const overIndex = destTasks.findIndex((t) => t._id === overId);
       movedTask.category = overCategory;
-      destTasks.splice(overIndex, 0, movedTask);
-      setTasks((prev) => ({
-        ...prev,
-        [activeCategory]: sourceTasks,
-        [overCategory]: destTasks,
-      }));
+      updatedDestTasks.splice(overIndex, 0, movedTask);
     }
 
+    // Update order for all tasks in the destination column
+    updatedDestTasks.forEach((task, index) => {
+      task.order = index;
+    });
+
+    setTasks((prev) => ({
+      ...prev,
+      [activeCategory]: activeCategory === overCategory ? updatedDestTasks : sourceTasks,
+      [overCategory]: activeCategory !== overCategory ? updatedDestTasks : destTasks,
+    }));
+
+    // Sync all affected tasks with backend
     try {
-      await axiosPublic.put(`/tasks/${movedTask._id}`, movedTask, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
+      console.log("Updating tasks:", updatedDestTasks);
+      await Promise.all(
+        updatedDestTasks.map((task) =>
+          axiosPublic.put(`/tasks/${task._id}`, task, {
+            headers: { Authorization: `Bearer ${user.token}` },
+          })
+        )
+      );
     } catch (error) {
       console.error("Drag update failed:", error);
       fetchTasks(); // Rollback on error
@@ -101,11 +117,11 @@ const TaskList = () => {
           updatedTasks[response.data.category] = [
             ...updatedTasks[response.data.category],
             response.data,
-          ];
+          ].sort((a, b) => a.order - b.order);
         } else {
-          updatedTasks[response.data.category] = updatedTasks[response.data.category].map(
-            (t) => (t._id === taskId ? response.data : t)
-          );
+          updatedTasks[response.data.category] = updatedTasks[response.data.category]
+            .map((t) => (t._id === taskId ? response.data : t))
+            .sort((a, b) => a.order - b.order);
         }
         return updatedTasks;
       });
@@ -128,7 +144,7 @@ const TaskList = () => {
         if (category) {
           updatedTasks[category] = updatedTasks[category].filter(
             (t) => t._id !== taskId
-          );
+          ).map((task, index) => ({ ...task, order: index })); // Reorder after delete
         }
         return updatedTasks;
       });

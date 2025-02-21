@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ReactDatePicker from "react-datepicker";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 // Yup validation schema
 const taskSchema = Yup.object().shape({
@@ -24,6 +25,7 @@ const taskSchema = Yup.object().shape({
 const TaskForm = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate()
 
   // Initial values for the form
   const initialValues = {
@@ -49,6 +51,7 @@ const TaskForm = () => {
             headers: {Authorization:`Bearer ${user?.token || user?.accessToken}`}
         })
         console.log("data post", data)
+        navigate('/dashboard/tasklist')
         resetForm()
     } catch (error) {
         console.error("Error submitting task:", error.response?.data || error.message);
