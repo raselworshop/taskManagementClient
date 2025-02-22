@@ -23,7 +23,8 @@ const SignUp = () => {
       // console.log(user)
       if (user) {
         toast.success("User successfully signed in!");
-        navigate(from, { replace: true } || "/dashboard");
+        const redirectPath = from || "/dashboard/tasklist";
+        navigate(redirectPath, { replace: true });
       }
       // console.log("Google signin")
     } catch (error) {
@@ -61,17 +62,19 @@ const SignUp = () => {
       const result = await createUser(email, password);
       await updateUserProfile(name);
 
-      console.log(result)
-      setUser({ ...result.user, displayName: name});
+      console.log(result);
+      setUser({ ...result.user, displayName: name });
       if (result.user.email) {
         toast.success("User created successfully!");
       } else {
         toast.error("User creating unsuccessfull!");
       }
-      navigate(from, { replace: true });
+      form
+        ? navigate(from, { replace: true })
+        : navigate("/dashboard/tasklist");
       // console.log("User created successfully!", result)
     } catch (error) {
-    //   console.error('Error creating user:', error);
+      //   console.error('Error creating user:', error);
       toast.error("User creating unsuccessfull!" || error.message);
     } finally {
       setLoading(false);
@@ -84,15 +87,15 @@ const SignUp = () => {
     return <Spinner />;
   }
   return (
-    <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
+    <div className="flex justify-center items-center min-h-[calc(100vh-306px)] dark:text-dark-text bg-primary text-text dark:bg-dark-background">
       <div className="flex flex-col md:flex-row container mx-auto overflow-hidden rounded-lg shadow-lg ">
         <div className=" px-6 py-8 md:w-1/2">
           <p className="mt-3 text-xl text-center">Get Your Free Account Now.</p>
 
-            {/* google sign in button */}
+          {/* google sign in button */}
           <div
             onClick={handleGoogleSignIn}
-            className="flex cursor-pointer items-center justify-center mt-4 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-500 "
+            className="flex cursor-pointer items-center justify-center mt-4 transition-colors duration-300 transform border rounded-lg hover:text-white hover:bg-secondary"
           >
             <div className="px-4 py-2">
               <svg className="w-6 h-6" viewBox="0 0 40 40">
@@ -120,7 +123,7 @@ const SignUp = () => {
             </span>
           </div>
 
-            {/* divider */}
+          {/* divider */}
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b  lg:w-1/4"></span>
 
@@ -141,7 +144,7 @@ const SignUp = () => {
                 id="name"
                 autoComplete="name"
                 name="name"
-                className="block w-full px-4 py-2 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                className="block w-full px-4 py-2 border rounded-lg dark:border-dark-border dark:bg-dark-background dark:text-gray-900 focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="text"
                 required
               />
@@ -173,7 +176,8 @@ const SignUp = () => {
                 id="LoggingEmailAddress"
                 autoComplete="email"
                 name="email"
-                className="block w-full px-4 py-2 rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                className="block w-full px-4 py-2 rounded-lg
+                dark:border-dark-border dark:bg-dark-background dark:text-gray-900 focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="email"
                 required
               />
@@ -194,7 +198,7 @@ const SignUp = () => {
                   id="loggingPassword"
                   autoComplete="current-password"
                   name="password"
-                  className="block w-full px-4 py-2 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                  className="block w-full px-4 py-2 border rounded-lg dark:border-dark-border dark:bg-dark-background dark:text-gray-900  focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type={eyeOpen ? "text" : "password"}
                   required
                 />
@@ -209,7 +213,7 @@ const SignUp = () => {
               </div>
             </div>
             {passError && <p className="text-xs text-red-500">{passError}</p>}
-            
+
             {/* sign up buttn */}
             <div className="mt-6">
               <button
@@ -221,7 +225,7 @@ const SignUp = () => {
             </div>
           </form>
 
-            {/* sign in link */}
+          {/* sign in link */}
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b  md:w-1/4"></span>
 

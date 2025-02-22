@@ -161,7 +161,7 @@ const TaskForm = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn btn-primary w-full rounded-lg hover:bg-primary-focus transition duration-200 disabled:opacity-50"
+            className="btn mt-2 btn-primary w-full rounded-lg hover:bg-primary-focus transition duration-200 disabled:opacity-50"
           >
             {isSubmitting ? (
               <span className="loading loading-spinner"></span>

@@ -1,11 +1,23 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import navImg from "../../assets/navandfoot.webp";
 import ThemeToggle from "../../Context/Theme/ThemeToggle";
 
 const Navbar = () => {
-  const { user, signOutUser } = useAuth();
+  const { user, setUser, signOutUser } = useAuth();
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    signOutUser().then(() => {
+      setUser(null)
+      navigate("/");
+    }).catch(error => {
+      console.error("Logout Error:", error);
+    });
+  };
+  
+
     const links = (
       <>
         <li>
@@ -98,7 +110,7 @@ return (
               <li>
                 <a>Settings</a>
               </li>
-              <li onClick={signOutUser}>
+              <li onClick={handleLogOut}>
                 <a>Logout</a>
               </li>
               <li><ThemeToggle/></li>

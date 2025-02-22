@@ -157,7 +157,7 @@ const TaskList = () => {
   if (!user) return <p className="text-center text-gray-500">Please sign in to view tasks.</p>;
 
   return (
-    <div className="task-list p-6 max-w-7xl mx-auto">
+    <div className="task-list p-6 max-w-7xl mx-auto ">
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Your Tasks</h1>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <div className="task-board flex flex-col md:flex-row gap-4">
@@ -185,7 +185,7 @@ const TaskList = () => {
 
 const SortableColumn = ({ category, tasks, onEdit, onDelete }) => {
   return (
-    <div className="column flex-1 min-w-[250px] bg-gray-100 p-4 rounded-lg shadow">
+    <div className="column flex-1 min-w-[250px] p-4 rounded-lg shadow">
       <h2 className="text-xl font-semibold text-gray-700 mb-4">{category}</h2>
       <SortableContext items={tasks.map((task) => task._id)} strategy={verticalListSortingStrategy}>
         {tasks.map((task) => (
@@ -217,7 +217,7 @@ const SortableItem = ({ task, onEdit, onDelete }) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="task bg-white p-4 mb-2 rounded-md shadow-md border border-gray-200 hover:shadow-lg transition-shadow cursor-grab"
+      className="task p-4 mb-2 rounded-md shadow-md border border-gray-200 hover:shadow-lg transition-shadow cursor-grab"
     >
       <h3 className="font-medium text-gray-800">{task.title}</h3>
       <p className="text-gray-600">{task.description}</p>
@@ -247,7 +247,7 @@ const EditTaskModal = ({ task, onSubmit, onClose }) => {
   };
 
   return (
-    <div className="modal modal-open fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="modal modal-open fixed inset-0 bg-opacity-50 flex items-center justify-center">
       <div className="modal-box bg-base-100 p-6 rounded-lg max-w-md w-full">
         <h3 className="text-xl font-bold mb-4">Edit Task</h3>
         <form onSubmit={handleSubmit}>

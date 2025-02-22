@@ -12,7 +12,6 @@ import {
 } from "firebase/auth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import { Navigate } from "react-router-dom";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -69,18 +68,13 @@ const AuthProvider = ({ children }) => {
             // });
           }).catch(error=>{
             // console.log("Backend login error", error)
-            toast.error("User login error" || error.message)
-          })
-
-        setLoading(false);
+            toast.error(error.message || "User login error" )
+          }).finally(()=> setLoading(false))
+        
       } else {
         // do something
         localStorage.removeItem("user");
 
-        toast.error("Sign out");
-        if(!currentUser){
-          return <Navigate to={'/joinus'} />
-        }
         setLoading(false);
       }
     });

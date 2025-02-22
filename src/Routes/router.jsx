@@ -6,11 +6,14 @@ import Signin from "../pages/AuthRelated/Signin";
 import Dashboard from "../layouts/Dashboard";
 import TaskForm from "../pages/DashboardLayout/DBELEMENT/TaskForm/TaskForm";
 import TaskList from "../pages/DashboardLayout/DBELEMENT/TaskList/TaskList";
+import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Main/>,
+        errorElement: <ErrorPage/>,
         children:[
             {
                 path: '',
@@ -28,15 +31,15 @@ const router = createBrowserRouter([
         children:[
             {
                 path: '',
-                element: <Home/>
+                element: <PrivateRoute><Home/></PrivateRoute>
             },
             {
                 path: "taskaddform",
-                element:<TaskForm/>
+                element: <PrivateRoute><TaskForm/></PrivateRoute>
             },
             {
                 path: 'tasklist',
-                element: <TaskList/>
+                element: <PrivateRoute><TaskList/></PrivateRoute>
             }
         ]
     },

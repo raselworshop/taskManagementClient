@@ -43,7 +43,7 @@ export default function DashboardLayout() {
             to={"/dashboard/taskaddform"}
             className="block py-2 px-4 rounded hover:bg-gray-200"
           >
-            ADD TASK
+            Add Task
           </Link>
         </nav>
       </div>

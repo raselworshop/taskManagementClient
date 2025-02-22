@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    /* Light Mode Colors */
+    --primary-light: #1E90FF;
+    --secondary-light: #00BFFF;
+    --background-light: #FFFFFF;
+    --card-bg-light: #F8F9FA;
+    --text-light: #333333;
+    --border-light: #E0E0E0;
+    --accent-light: #FF4500;
+    --success-light: #34C759;
+    --warning-light: #FF9500;
+    --error-light: #FF3B30;
+  
+    /* Dark Mode Colors */
+    --primary-dark: #1E90FF;
+    --secondary-dark: #00BFFF;
+    --background-dark: #121212;
+    --card-bg-dark: #1E1E1E;
+    --text-dark: #E0E0E0;
+    --border-dark: #333333;
+    --accent-dark: #FF4500;
+    --success-dark: #34C759;
+    --warning-dark: #FF9500;
+    --error-dark: #FF3B30;
+  }
+  
+  /* Default Theme (Light Mode) */
+  body {
+    background-color: var(--background-light);
+    color: var(--text-light);
+  }
+  
+  .card {
+    background-color: var(--card-bg-light);
+    border: 1px solid var(--border-light);
+  }
+  
+  /* Dark Mode */
+  .dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+  }
+  
+  .dark .card {
+    background-color: var(--card-bg-dark);
+    border: 1px solid var(--border-dark);
+  }
+  
