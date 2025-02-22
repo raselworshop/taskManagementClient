@@ -81,7 +81,7 @@ const SignUp = () => {
     return <Spinner />;
   }
   return (
-    <div className="flex justify-center items-center min-h-[calc(100vh-306px)] dark:text-dark-text bg-primary text-text dark:bg-dark-background">
+    <div className="flex justify-center items-center min-h-screen dark:text-dark-text bg-primary text-text dark:bg-dark-background">
       <div className="flex flex-col md:flex-row container mx-auto overflow-hidden rounded-lg shadow-lg ">
         <div className=" px-6 py-8 md:w-1/2">
           <p className="mt-3 text-xl text-center">Get Your Free Account Now.</p>
@@ -138,7 +138,7 @@ const SignUp = () => {
                 id="name"
                 autoComplete="name"
                 name="name"
-                className="block w-full px-4 py-2 border rounded-lg dark:border-dark-border dark:bg-dark-background dark:text-gray-900 focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                className="block w-full px-4 py-2 border rounded-lg dark:border-dark-border dark:bg-dark-background dark:text-white focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="text"
                 required
               />
@@ -171,7 +171,7 @@ const SignUp = () => {
                 autoComplete="email"
                 name="email"
                 className="block w-full px-4 py-2 rounded-lg
-                dark:border-dark-border dark:bg-dark-background dark:text-gray-900 focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                dark:border-dark-border dark:bg-dark-background dark:text-white focus:border-blue-400 border focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="email"
                 required
               />
@@ -192,7 +192,7 @@ const SignUp = () => {
                   id="loggingPassword"
                   autoComplete="current-password"
                   name="password"
-                  className="block w-full px-4 py-2 border rounded-lg dark:border-dark-border dark:bg-dark-background dark:text-gray-900  focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                  className="block w-full px-4 py-2 border rounded-lg dark:border-dark-border dark:bg-dark-background dark:text-white  focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type={eyeOpen ? "text" : "password"}
                   required
                 />

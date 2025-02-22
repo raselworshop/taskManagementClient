@@ -108,7 +108,7 @@ const TaskList = () => {
         [activeCategory]: [...sourceTasks], // Remaining tasks after removal
         [overCategory]: [...updatedDestTasks], // Updated destination
       };
-      console.log("Setting new tasks:", newTasks);
+      // console.log("Setting new tasks:", newTasks);
       return newTasks;
     });
 
