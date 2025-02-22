@@ -41,12 +41,6 @@ const SignUp = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const userData = {
-      name,
-      email,
-      password,
-    };
-    console.log("Comming soon email pass", userData);
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!passwordRegex.test(password)) {
@@ -62,7 +56,7 @@ const SignUp = () => {
       const result = await createUser(email, password);
       await updateUserProfile(name);
 
-      console.log(result);
+      // console.log(result);
       setUser({ ...result.user, displayName: name });
       if (result.user.email) {
         toast.success("User created successfully!");

@@ -6,6 +6,7 @@ import ReactDatePicker from "react-datepicker";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 // Yup validation schema
 const taskSchema = Yup.object().shape({
@@ -36,10 +37,11 @@ const TaskForm = () => {
   };
 
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-    console.log("Task Submitted:", values);
-    console.log("Task Submitted user:", user);
+    // console.log("Task Submitted:", values);
+    // console.log("Task Submitted user:", user);
     if (!user || !user?.token) {
-      console.error("User isn't Authenticated")
+      // console.error("User isn't Authenticated")
+      toast.error("User isn't Authenticated")
       setSubmitting(false)
       return
     }
@@ -50,11 +52,15 @@ const TaskForm = () => {
         const {data} = await axiosPublic.post('/tasks', taskData, {
             headers: {Authorization:`Bearer ${user?.token || user?.accessToken}`}
         })
-        console.log("data post", data)
+        // console.log("data post", data)
+        if(data._id){
+          toast.success("Posted successfully!")
+        }
         navigate('/dashboard/tasklist')
         resetForm()
     } catch (error) {
-        console.error("Error submitting task:", error.response?.data || error.message);
+        // console.error("Error submitting task:", error.response?.data || error.message);
+        toast.error(error.message)
     } finally {
       setSubmitting(false);
     }

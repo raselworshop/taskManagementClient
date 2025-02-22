@@ -5,7 +5,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   return (
     <div className="flex md:h-[calc(100vh - 80px)] bg-gray-100 dark:bg-dark-background">

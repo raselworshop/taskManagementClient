@@ -42,17 +42,17 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  console.log({ user }); // in this log I see user is null how to solve
+  // console.log({ user }); // done
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("State Cuptured", currentUser);
+      // console.log("State Cuptured", currentUser);
 
       if (currentUser) {
-        // console.log("idToken", currentUser.accessToken); //here i see user
+        // console.log("idToken", currentUser.accessToken); //done
         axiosPublic
           .post("/login", { idToken: currentUser.accessToken, role: "user" })
           .then((res) => {
-            // console.log("Login successful", res); //this and down log nothing show why
+            // console.log("Login successful", res); //done
             if (res.data.token) {
               // toast.success('Login successful')
               localStorage.setItem(

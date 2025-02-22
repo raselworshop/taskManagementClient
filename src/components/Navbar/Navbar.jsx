@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import navImg from "../../assets/navandfoot.webp";
 import ThemeToggle from "../../Context/Theme/ThemeToggle";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, setUser, signOutUser } = useAuth();
@@ -13,7 +14,8 @@ const Navbar = () => {
       setUser(null)
       navigate("/");
     }).catch(error => {
-      console.error("Logout Error:", error);
+      // console.error("Logout Error:", error);
+      toast.error(error.message)
     });
   };
   
@@ -23,12 +25,12 @@ const Navbar = () => {
         <li>
           <NavLink className={({isActive})=>`${isActive? "bg-sky-400 btn-outline": "bg-sky-300 btn-outline"} mr-2`} to={"/dashboard"}>Dashboard</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink className={({isActive})=>`${isActive? "bg-sky-400 btn-outline": "bg-sky-300 btn-outline"} mr-2`} to={"/"}>Home</NavLink>
         </li>
         <li>
           <NavLink className={({isActive})=>`${isActive? "bg-sky-400 btn-outline": "bg-sky-300 btn-outline"} mr-2`} to={"/"}>Home</NavLink>
-        </li>
+        </li> */}
         <li><ThemeToggle/></li>
       </>
     );

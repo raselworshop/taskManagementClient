@@ -136,13 +136,14 @@ const TaskList = () => {
     }
   };
 
-  useEffect(() => {
-    // console.log("Tasks state updated:", tasks);
-    toast.success("Tasks state updated")
-  }, [tasks]);
-  useEffect(() => {
-    console.log("editingTask updated:", editingTask);
-  }, [editingTask]);
+  // only for testing purposes
+  // useEffect(() => {
+  //   // console.log("Tasks state updated:", tasks);
+  //   toast.success("Tasks state updated")
+  // }, [tasks]);
+  // useEffect(() => {
+  //   console.log("editingTask updated:", editingTask);
+  // }, [editingTask]);
 
   const handleEditSubmit = async (taskId, updatedData) => {
     try {
@@ -174,7 +175,7 @@ const TaskList = () => {
       setEditingTask(null);
     } catch (error) {
       toast.error("Edit failed!");
-      console.error("Edit failed:", error);
+      // console.error("Edit failed:", error);
     }
   };
 
@@ -196,7 +197,8 @@ const TaskList = () => {
         return updatedTasks;
       });
     } catch (error) {
-      console.error("Delete failed:", error);
+      // console.error("Delete failed:", error);
+      toast.error(error.message)
       fetchTasks();
     }
   };
@@ -242,12 +244,12 @@ const TaskList = () => {
 };
 
 const SortableColumn = ({ category, tasks, onEdit, onDelete }) => {
-  console.log(
-    "SortableContext items for",
-    category,
-    ":",
-    tasks.map((task) => task._id)
-  );
+  // console.log(
+  //   "SortableContext items for",
+  //   category,
+  //   ":",
+  //   tasks.map((task) => task._id)
+  // );
   return (
     <div className="column flex-1 min-w-[250px] p-4 rounded-lg shadow">
       <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
@@ -283,7 +285,7 @@ const SortableItem = ({ task, onEdit, onDelete }) => {
 
   const handleEditClick = (e) => {
     e.stopPropagation();
-    console.log("Edit clicked for task:", task._id, "at:", new Date().toISOString());
+    // console.log("Edit clicked for task:", task._id, "at:", new Date().toISOString());
     onEdit(task);
   };
 
