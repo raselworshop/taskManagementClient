@@ -8,10 +8,10 @@ export default function DashboardLayout() {
   console.log(location);
 
   return (
-    <div className="flex md:h-[calc(100vh - 80px)] bg-gray-100">
+    <div className="flex md:h-[calc(100vh - 80px)] bg-gray-100 dark:bg-dark-background">
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 overflow-auto left-0 w-64 bg-white min-h-full shadow-md transition-transform duration-300 md:relative md:translate-x-0 ${
+        className={`fixed inset-y-0 overflow-auto left-0 w-64 bg-sky-300 min-h-full shadow-md transition-transform duration-300 md:relative md:translate-x-0 ${
           sidebarOpen ? "translate-x-0 z-40" : "-translate-x-full"
         }`}
       >
@@ -25,15 +25,15 @@ export default function DashboardLayout() {
 
         <nav className="mt-10 px-4 space-y-2">
           <h2 className="text-gray-600 text-sm font-semibold">WORKSPACE</h2>
-          <a href="#" className="block py-2 px-4 rounded hover:bg-gray-200">
-            Dashboard
+          <a onClick={()=>alert('Coming soon')} className="block py-2 px-4 rounded hover:bg-gray-200">
+            My Tasks
           </a>
-          <a href="#" className="block py-2 px-4 rounded hover:bg-gray-200">
+          <a onClick={()=>alert('Coming soon')} className="block py-2 px-4 rounded hover:bg-gray-200">
             My Wallet
           </a>
 
-          <h2 className="text-gray-600 text-sm font-semibold mt-4">APPS</h2>
-          <a href="#" className="block py-2 px-4 rounded hover:bg-gray-200">
+          <h2 className="text-gray-600 text-sm font-semibold mt-4">Details</h2>
+          <a onClick={()=>alert('Coming soon')} className="block py-2 px-4 rounded hover:bg-gray-200">
             Users
           </a>
           <Link to={'/dashboard/tasklist'} className="block py-2 px-4 rounded hover:bg-gray-200">
@@ -51,14 +51,14 @@ export default function DashboardLayout() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top Navigation */}
-        <div className="bg-white shadow p-4 flex justify-between items-center">
+        <div className="bg-white dark:bg-gray-800 dark:text-white shadow p-4 flex justify-between items-center">
           <button className="md:hidden" onClick={() => setSidebarOpen(true)}>
             <FaBars className="text-xl" />
           </button>
           <input
             type="text"
             placeholder="Search..."
-            className="border px-4 py-2 w-full max-w-md rounded"
+            className="border px-4 py-2 w-full max-w-md rounded dark:border-dark-border dark:bg-dark-background dark:text-gray-100"
           />
           {/* Breadcrumb */}
           <div className="px-6 py-2 bg-gray-200 hidden md:block max-w-xs">

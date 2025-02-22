@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      <div className="mt-14 md:mt-20">
+      <div className="mt-14 md:mt-[70px]">
         <DashboardLayout />
       </div>
       <div className="mb-0 flex items-center justify-center">

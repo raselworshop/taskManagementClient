@@ -55,7 +55,7 @@ return (
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm md:flex items-center justify-center dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
@@ -101,13 +101,13 @@ return (
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
+              <li onClick={()=> alert("Coming soon")}>
                 <a className="justify-between">
                   Profile
                   <span className="badge">New</span>
                 </a>
               </li>
-              <li>
+              <li onClick={()=> alert("Coming soon")}>
                 <a>Settings</a>
               </li>
               <li onClick={handleLogOut}>
